@@ -73,22 +73,10 @@ public class Client {
         return purpose;
     }
 
-    public boolean isAgeEligible() {
-        return Validation.isAgeEligible(this);
-    }
-
     public double getPercentage() {
         return percentage;
     }
-
-    public boolean isIncomeSourceEligible() {
-        return Validation.isIncomeSourceEligible(this);
-    }
-
-    public boolean isCreditRatingEligible() {
-        return Validation.isCreditRatingEligible(this);
-    }
-
+    
     public boolean doesIncomeCoverLoan() {
         return loan <= getMaxCreditSumAccordingToIncomeAndMaturity();
     }

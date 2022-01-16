@@ -5,23 +5,28 @@ import ru.yandex.practicum.department.qa.sergei_tsarik.enums.CreditRating;
 import ru.yandex.practicum.department.qa.sergei_tsarik.enums.Gender;
 import ru.yandex.practicum.department.qa.sergei_tsarik.enums.IncomeSource;
 import ru.yandex.practicum.department.qa.sergei_tsarik.enums.Purpose;
+import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Credit;
+import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Validation;
 
 public class App {
     public static void main( String[] args ) {
         Client client = new Client(Gender.MALE, 50, IncomeSource.PASSIVE, CreditRating.EXCELLENT, 1, 1, 3, Purpose.CONSUMER);
 
-        if (!client.isAgeEligible()) throw new IllegalArgumentException("The age is more than retirement age" );
-        if (!client.isIncomeSourceEligible()) throw new IllegalArgumentException("No credit for " + IncomeSource.UNEMPLOYED);
-        if (!client.isCreditRatingEligible()) throw new IllegalArgumentException("No credit for rating " + CreditRating.POOR);
+        if (!Validation.isAgeEligible(client)) throw new IllegalArgumentException("The age is more than retirement age" );
+        if (!Validation.isIncomeSourceEligible(client)) throw new IllegalArgumentException("No credit for " + IncomeSource.UNEMPLOYED);
+        if (!Validation.isCreditRatingEligible(client)) throw new IllegalArgumentException("No credit for rating " + CreditRating.POOR);
 
-        double maxSumToLoan = client.getMaxCreditSumAccordingToIncomeSourceAndCreditRating();
+//        double maxSumToLoan = client.getMaxCreditSumAccordingToIncomeSourceAndCreditRating();
+        double maxSumToLoan = Credit.getMaxSumForIncomeSourceAndCreditRating(client);
+
         double clientSumToLoan = client.getSum();
         System.out.println("Client sum to loan = " + clientSumToLoan);
         System.out.println("Max credit loan sum according to credit rating and income source = " + maxSumToLoan);
         if (clientSumToLoan > maxSumToLoan) client.setLoan(maxSumToLoan);
         System.out.println("Client loan sum = " + client.getLoan());
 
-        maxSumToLoan = client.getMaxCreditSumAccordingToIncomeAndMaturity();
+//        maxSumToLoan = client.getMaxCreditSumAccordingToIncomeAndMaturity();
+        maxSumToLoan = Credit.getMaxSumForIncomeAndMaturity(client);
         // System.out.println("Max credit loan sum according to income and maturity = " + maxSumToLoan);
         if (!client.doesIncomeCoverLoan()) throw new IllegalArgumentException("No credit ...");
 
