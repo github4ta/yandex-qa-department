@@ -1,6 +1,7 @@
 package ru.yandex.practicum.department.qa.sergei_tsarik.domain;
 
 import ru.yandex.practicum.department.qa.sergei_tsarik.enums.*;
+import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Credit;
 import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Interest;
 import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Payment;
 import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Validation;
@@ -97,15 +98,11 @@ public class Client {
     }
 
     public double getMaxCreditSumAccordingToIncomeAndMaturity() {
-        return (double) maturity * (income / 3.0);
+        return Credit.getMaxSumForIncomeAndMaturity(this);
     }
 
     public double getMaxCreditSumAccordingToIncomeSourceAndCreditRating() {
-        double maxCreditSum = 10.0;
-        if (incomeSource == IncomeSource.BUSINESS || creditRating == CreditRating.EXCELLENT || creditRating == CreditRating.GREAT) maxCreditSum = 10;
-        if (incomeSource == IncomeSource.EMPLOYEE || creditRating == CreditRating.GOOD) maxCreditSum = 5.0;
-        if (incomeSource == IncomeSource.PASSIVE || creditRating == CreditRating.FAIR) maxCreditSum = 1.0;
-        return maxCreditSum;
+        return Credit.getMaxSumForIncomeSourceAndCreditRating(this);
     }
 
     public double getAnnualPayment() {
