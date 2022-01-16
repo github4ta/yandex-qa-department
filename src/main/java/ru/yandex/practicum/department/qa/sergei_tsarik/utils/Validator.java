@@ -5,7 +5,7 @@ import ru.yandex.practicum.department.qa.sergei_tsarik.enums.CreditRating;
 import ru.yandex.practicum.department.qa.sergei_tsarik.enums.IncomeSource;
 import ru.yandex.practicum.department.qa.sergei_tsarik.enums.RetirementAge;
 
-public class Validation {
+public class Validator {
 
     public static boolean isAgeEligible(Client client) {
         int personAge = client.getAge();
