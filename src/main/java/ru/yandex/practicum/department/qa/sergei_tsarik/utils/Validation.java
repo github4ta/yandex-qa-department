@@ -29,27 +29,16 @@ public class Validation {
     }
 
     public static boolean isRequestedSumLessOrEqualsToMaxCreditSum(Client client) {
-        double maxCreditSum = Credit.getMaxSumForIncomeSourceAndCreditRating(client);
+        double maxCreditSum = Calculator.getMaxSumForIncomeSourceAndCreditRating(client);
         double requestedSum = client.getRequestedSum();
         return requestedSum <= maxCreditSum;
     }
 
     public static boolean isAnnualPaymentCoveredByIncome(Client client) {
-        return Payment.getAnnualPayment(client) <= client.getIncome() / 2.0;
+        return Calculator.getAnnualPayment(client) <= client.getIncome() / 2.0;
     }
 
     public static boolean isLoanCoveredByIncome(Client client) {
-        return client.getAvailableSum() <= Credit.getMaxSumForIncomeAndMaturity(client);
-    }
-
-    public static Client getCheckedClientForCredit(Client client) {
-        if (!isAgeEligible(client)) throw new IllegalArgumentException("Credit is impossible due to that age is more than retirement age." );
-        if (!isIncomeSourceEligible(client)) throw new IllegalArgumentException("Credit is impossible due to " + IncomeSource.UNEMPLOYED + ".");
-        if (!isCreditRatingEligible(client)) throw new IllegalArgumentException("Credit is impossible due to credit rating is " + CreditRating.POOR + ".");
-        if (!isRequestedSumLessOrEqualsToMaxCreditSum(client)) client.setAvailableSum(Credit.getMaxSumForIncomeSourceAndCreditRating(client));
-        if (!isLoanCoveredByIncome(client)) throw new IllegalArgumentException("Credit is impossible due to income does not cover loan and percentages.");
-        if (!isAnnualPaymentCoveredByIncome(client)) throw new IllegalArgumentException("Credit is impossible due to income does not cover annual payment.");
-
-        return client;
+        return client.getAvailableSum() <= Calculator.getMaxSumForIncomeAndMaturity(client);
     }
 }

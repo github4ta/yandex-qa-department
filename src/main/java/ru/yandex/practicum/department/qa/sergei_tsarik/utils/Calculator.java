@@ -4,7 +4,7 @@ import ru.yandex.practicum.department.qa.sergei_tsarik.domain.Client;
 import ru.yandex.practicum.department.qa.sergei_tsarik.enums.CreditRating;
 import ru.yandex.practicum.department.qa.sergei_tsarik.enums.IncomeSource;
 
-public class Credit {
+public class Calculator {
 
     private static final double CREDIT_SUM_10M = 10.0;
     private static final double CREDIT_SUM_5M = 5.0;
@@ -22,5 +22,11 @@ public class Credit {
 
     public static double getMaxSumForIncomeAndMaturity(Client client) {
         return (double) client.getMaturity() * (client.getIncome() / 3.0);
+    }
+
+    public static double getAnnualPayment(Client client) {
+        double percentageDouble = Interest.getAnnualPercentage(client) / 100.0;
+        double maturityDouble = (double) client.getMaturity();
+        return client.getAvailableSum() * ( 1.0 + maturityDouble * percentageDouble) / maturityDouble;
     }
 }
