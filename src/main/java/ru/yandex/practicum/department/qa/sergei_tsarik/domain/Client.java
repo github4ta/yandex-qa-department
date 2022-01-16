@@ -74,14 +74,6 @@ public class Client {
 
     public boolean isAgeEligible() {
         return Validation.isAgeEligible(this);
-/*        int personAge = age;
-        switch (gender) {
-            case MALE:
-                if (personAge <= RetirementAge.BY_2022_MALE.getValue()) return true;
-            case FEMALE:
-                if (personAge <= RetirementAge.BY_2022_FEMALE.getValue()) return true;
-        }
-        return false;*/
     }
 
     public double getPercentage() {
@@ -90,18 +82,10 @@ public class Client {
 
     public boolean isIncomeSourceEligible() {
         return Validation.isIncomeSourceEligible(this);
-/*
-        if (incomeSource != IncomeSource.UNEMPLOYED) return true;
-        return false;
-*/
     }
 
     public boolean isCreditRatingEligible() {
         return Validation.isCreditRatingEligible(this);
-/*
-        if (creditRating != CreditRating.POOR) return true;
-        return false;
-*/
     }
 
     public boolean doesIncomeCoverLoan() {
@@ -130,60 +114,22 @@ public class Client {
 
     public void calculateAnnualPayment() {
         percentage = Interest.getAnnualPercentage(this);
-/*
-        double percentageDouble = percentage / 100.0;
-        annualPayment = loan * ( 1.0 + (double) maturity * percentageDouble) / (double) maturity;
-*/
         annualPayment = Payment.getAnnualPayment(this);
     }
 
     public double getPurposePercentage() {
         return Interest.getPurposePercentage(this);
-/*        switch(purpose) {
-            case MORTGAGE:
-                return -2.0;
-            case BUSINESS:
-                return -0.5;
-            case CAR:
-                return 0;
-            case CONSUMER:
-                return 1.5;
-        }
-        throw new IllegalArgumentException("");*/
     }
 
     public double getCreditRatingPercentage() {
         return Interest.getCreditRatingPercentage(this);
-/*
-        switch(creditRating) {
-            case FAIR:
-                return 1.5;
-            case GOOD:
-                return 0;
-            case GREAT:
-                return -0.25;
-            case EXCELLENT:
-                return -0.75;
-        }
-        throw new IllegalArgumentException("");
-*/
     }
 
     public double getIncomeSourcePercentage() {
         return Interest.getIncomeSourcePercentage(this);
-/*        switch(incomeSource) {
-            case PASSIVE:
-                return 0.5;
-            case EMPLOYEE:
-                return -0.25;
-            case BUSINESS:
-                return 0.25;
-        }
-        throw new IllegalArgumentException("");*/
     }
 
     public double getLoanSumPercentage() {
         return Interest.getLoanSumPercentage(this);
-//        return - Math.log(loan);
     }
 }
