@@ -27,4 +27,18 @@ public class Validation {
         if (client.getCreditRating() != CreditRating.POOR) return true;
         return false;
     }
+
+    public static boolean isRequestedSumLessOrEqualsToMaxCreditSum(Client client) {
+        double maxCreditSum = Credit.getMaxSumForIncomeSourceAndCreditRating(client);
+        double requestedSum = client.getSum();
+        return requestedSum <= maxCreditSum;
+    }
+
+    public static boolean isAnnualPaymentCoveredByIncome(Client client) {
+        return Payment.getAnnualPayment(client) <= client.getIncome() / 2.0;
+    }
+
+    public static boolean isLoanCoveredByIncome(Client client) {
+        return client.getLoan() <= Credit.getMaxSumForIncomeAndMaturity(client);
+    }
 }

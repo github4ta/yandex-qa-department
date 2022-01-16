@@ -76,7 +76,7 @@ public class Client {
     public double getPercentage() {
         return percentage;
     }
-    
+
     public boolean doesIncomeCoverLoan() {
         return loan <= getMaxCreditSumAccordingToIncomeAndMaturity();
     }
