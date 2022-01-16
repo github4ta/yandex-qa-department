@@ -23,5 +23,4 @@ public class Credit {
     public static double getMaxSumForIncomeAndMaturity(Client client) {
         return (double) client.getMaturity() * (client.getIncome() / 3.0);
     }
-
 }

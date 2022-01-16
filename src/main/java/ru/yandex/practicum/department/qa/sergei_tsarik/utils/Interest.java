@@ -47,7 +47,7 @@ public class Interest {
     }
 
     public static double getLoanSumPercentage(Client client) {
-        return - Math.log(client.getLoan());
+        return - Math.log(client.getAvailableSum());
     }
 
     public static double getAnnualPercentage(Client client) {

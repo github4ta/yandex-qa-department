@@ -11,20 +11,22 @@ import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Payment;
 import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Validation;
 
 public class App {
-    public static void main( String[] args ) {
-        Client client = new Client(Gender.MALE, 50, IncomeSource.PASSIVE, CreditRating.EXCELLENT, 1, 1, 3, Purpose.CONSUMER);
+    public static void main(String[] args) {
+        Client client = new Client(Gender.MALE, 50, IncomeSource.BUSINESS, CreditRating.EXCELLENT, 10, 5, 3, Purpose.CONSUMER);
 
-        if (!Validation.isAgeEligible(client)) throw new IllegalArgumentException("Credit is impossible due to that age is more than retirement age." );
-        if (!Validation.isIncomeSourceEligible(client)) throw new IllegalArgumentException("Credit is impossible due to " + IncomeSource.UNEMPLOYED);
-        if (!Validation.isCreditRatingEligible(client)) throw new IllegalArgumentException("Credit is impossible due to credit rating is " + CreditRating.POOR);
+        try {
+            client = Validation.getCheckedClientForCredit(client);
 
-        if (!Validation.isRequestedSumLessOrEqualsToMaxCreditSum(client)) client.setLoan(Credit.getMaxSumForIncomeSourceAndCreditRating(client));
+            System.out.println("Credit sum has been requested = " + client.getRequestedSum() + " M.");
 
-        if (!Validation.isLoanCoveredByIncome(client)) throw new IllegalArgumentException("Credit is impossible due to income does not cover loan and percentages.");
-        if (!Validation.isAnnualPaymentCoveredByIncome(client)) throw new IllegalArgumentException("Credit is impossible due to income does not cover annual payment.");
-
-        System.out.println("Credit is possible.");
-        System.out.println("Credit loan = " + client.getLoan());
-        System.out.println("Credit annual payment  = " + Payment.getAnnualPayment(client) + " M.");
+            System.out.println("Credit is possible for:");
+            System.out.println("Credit sum = " + client.getAvailableSum() + " M.");
+            System.out.println("Credit percentage = " + Interest.getAnnualPercentage(client) + " %.");
+            System.out.println("Credit annual payment  = " + Payment.getAnnualPayment(client) + " M.");
+            System.out.println("Credit maturity " + client.getMaturity() + " years.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Credit is impossible.");
+            System.out.println(e.getMessage());
+        }
     }
 }
