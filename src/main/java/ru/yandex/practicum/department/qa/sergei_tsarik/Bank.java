@@ -5,7 +5,6 @@ import ru.yandex.practicum.department.qa.sergei_tsarik.domain.Credit;
 import ru.yandex.practicum.department.qa.sergei_tsarik.enums.CreditRating;
 import ru.yandex.practicum.department.qa.sergei_tsarik.enums.IncomeSource;
 import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Calculator;
-import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Interest;
 import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Validation;
 
 public class Bank {
@@ -19,7 +18,7 @@ public class Bank {
             if (!Validation.isLoanCoveredByIncome(client)) throw new IllegalArgumentException("Credit is impossible due to income does not cover loan and percentages.");
             if (!Validation.isAnnualPaymentCoveredByIncome(client)) throw new IllegalArgumentException("Credit is impossible due to income does not cover annual payment.");
 
-            return new Credit(true, client.getAvailableSum(), Interest.getAnnualPercentage(client), Calculator.getAnnualPayment(client), client.getMaturity(), "Credit is possible for:");
+            return new Credit(true, client.getAvailableSum(), Calculator.getAnnualPercentage(client), Calculator.getAnnualPayment(client), client.getMaturity(), "Credit is possible for:");
 
         } catch (IllegalArgumentException e) {
 
