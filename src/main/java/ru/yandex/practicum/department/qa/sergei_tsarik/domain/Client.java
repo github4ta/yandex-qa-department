@@ -4,7 +4,6 @@ import ru.yandex.practicum.department.qa.sergei_tsarik.enums.*;
 import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Credit;
 import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Interest;
 import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Payment;
-import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Validation;
 
 public class Client {
     private Gender gender;
@@ -75,46 +74,5 @@ public class Client {
 
     public double getPercentage() {
         return percentage;
-    }
-
-    public boolean doesIncomeCoverLoan() {
-        return loan <= getMaxCreditSumAccordingToIncomeAndMaturity();
-    }
-
-    public boolean doesIncomeCoverAnnualPayment() {
-        return annualPayment <= income / 2.0;
-    }
-
-    public double getMaxCreditSumAccordingToIncomeAndMaturity() {
-        return Credit.getMaxSumForIncomeAndMaturity(this);
-    }
-
-    public double getMaxCreditSumAccordingToIncomeSourceAndCreditRating() {
-        return Credit.getMaxSumForIncomeSourceAndCreditRating(this);
-    }
-
-    public double getAnnualPayment() {
-        return annualPayment;
-    }
-
-    public void calculateAnnualPayment() {
-        percentage = Interest.getAnnualPercentage(this);
-        annualPayment = Payment.getAnnualPayment(this);
-    }
-
-    public double getPurposePercentage() {
-        return Interest.getPurposePercentage(this);
-    }
-
-    public double getCreditRatingPercentage() {
-        return Interest.getCreditRatingPercentage(this);
-    }
-
-    public double getIncomeSourcePercentage() {
-        return Interest.getIncomeSourcePercentage(this);
-    }
-
-    public double getLoanSumPercentage() {
-        return Interest.getLoanSumPercentage(this);
     }
 }
