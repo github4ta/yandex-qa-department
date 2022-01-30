@@ -11,6 +11,11 @@ public class Bank {
 
     public Credit applyForCredit(Client client) {
         try {
+
+            if (!Validator.isIncomeValueInEligibleRange(client)) throw new IllegalArgumentException("Income value is not eligible." );
+            if (!Validator.isMaturityValueInEligibleRange(client)) throw new IllegalArgumentException("Maturity value is not eligible." );
+            if (!Validator.isRequestedSumInEligibleRange(client)) throw new IllegalArgumentException("Requested sum is not eligible." );
+
             if (!Validator.isAgeEligible(client)) throw new IllegalArgumentException("Credit is impossible due to that age is more than retirement age." );
             if (!Validator.isIncomeSourceEligible(client)) throw new IllegalArgumentException("Credit is impossible due to " + IncomeSource.UNEMPLOYED + ".");
             if (!Validator.isCreditRatingEligible(client)) throw new IllegalArgumentException("Credit is impossible due to credit rating is " + CreditRating.POOR + ".");
