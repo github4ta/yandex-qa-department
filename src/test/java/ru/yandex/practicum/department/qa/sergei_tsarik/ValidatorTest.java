@@ -1,10 +1,12 @@
-package ru.yandex.practicum.department.qa.sergei_tsarik.utils;
+package ru.yandex.practicum.department.qa.sergei_tsarik;
 
 import ru.yandex.practicum.department.qa.sergei_tsarik.domain.Client;
 import ru.yandex.practicum.department.qa.sergei_tsarik.enums.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.department.qa.sergei_tsarik.utils.Validator;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;

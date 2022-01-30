@@ -1,4 +1,4 @@
-package ru.yandex.practicum.department.qa.sergei_tsarik.utils;
+package ru.yandex.practicum.department.qa.sergei_tsarik;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -65,6 +65,7 @@ public class SmokeTest {
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
+    @Test
     public void testPathSix() {
         double creditSumExpected = 9.3905620875659;
         Client client = new Client(Gender.MALE, 50, IncomeSource.BUSINESS, CreditRating.EXCELLENT, 10, 5, 3, Purpose.CONSUMER);
